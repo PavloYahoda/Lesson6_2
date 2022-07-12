@@ -1,0 +1,15 @@
+Bogdan,
+Yahoda,
+14,
+Dnipro,
+0123456789;
+Andrew,
+Yahoda,
+11,
+Dnipro,
+0123456790;
+Pavlo,
+Yahoda,
+40,
+Dnipro,
+0123456788

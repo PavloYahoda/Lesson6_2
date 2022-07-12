@@ -1,0 +1,8 @@
+name:Mars
+Owner:Bogdan
+agePet:7;
+firstName:Bogdan
+lastName:Yahoda
+ageOwner:14
+address:Dnipro
+phone:0123456789
