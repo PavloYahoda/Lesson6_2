@@ -21,7 +21,7 @@ public class Owners {
         Owners.phone = phone;
     }
 
-    public static void main(String[] args){
+    public static ArrayList<Owners> ownerCreater(){
         File file = new File("Owners.txt");
         try (BufferedReader bReader = new BufferedReader(new FileReader(file))) {
 
@@ -49,11 +49,12 @@ public class Owners {
 //          Создаю объект с известными полями и добавляю в список объектов
                 owners.add(new Owners(firstName, lastName, age, address, phone));
             }
+            return owners;
 
-            System.out.println(owners);
         } catch (Exception ignored) {
 
         }
+        return null;
     }
 }
 
