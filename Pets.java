@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Pets {
 
@@ -14,7 +15,7 @@ public class Pets {
         Pets.age = age;
     }
 
-    public static ArrayList<Pets> petCreater() {
+    public static ArrayList<Pets> petCreator() {
         File file = new File("Pets.txt");
         try (BufferedReader bReader = new BufferedReader(new FileReader(file))) {
 
@@ -31,7 +32,7 @@ public class Pets {
             ArrayList<Pets> pets = new ArrayList<>();
 //          Беру по очереди каждую часть их буферного списка, сплитю и вношу в список полей объекта
             for (String s : buffer) {
-                System.out.println(s);
+//                System.out.println(s);
                 ArrayList<String> param = new ArrayList<>(Arrays.asList(s.split(",")));
 
                 name = param.get(0);
@@ -46,5 +47,24 @@ public class Pets {
 
         }
         return null;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Pets)) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+
+        Pets other = (Pets) object;
+        return age == other.age &&
+                Objects.equals(this.name, other.name) &&
+                Objects.equals(this.owner, other.owner);
     }
 }
