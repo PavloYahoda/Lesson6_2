@@ -13,6 +13,7 @@ public class Owners {
     private int age;
     private String address;
     private String phone;
+    private ArrayList<String> buffer;
 
     public Owners(String firstName, String lastName, int age, String address, String phone) {
         this.firstName = firstName;
@@ -26,7 +27,7 @@ public class Owners {
 
     }
 
-    public ArrayList<Owners> ownerCreator(){
+    public ArrayList<String> readFromFile(){
         File file = new File("Owners.txt");
         try (BufferedReader bReader = new BufferedReader(new FileReader(file))) {
 
@@ -36,14 +37,22 @@ public class Owners {
             while ((line = bReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
-//          Вычитал все из файла. Разделяю по ";" и создаю список
+
             String allLines = String.valueOf(stringBuilder);
-            ArrayList<String> buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
-//          В этот список буду добавлять созданные объекты класса Owners
+            buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
+
+        } catch (Exception ignored) {
+
+        }
+        return buffer;
+    }
+
+    public ArrayList<Owners> ownerCreator(){
+
             ArrayList<Owners> owner = new ArrayList<>();
-//          Беру по очереди каждую часть их буферного списка, сплитю и вношу в список полей объекта
+
             for (String s : buffer) {
-//                System.out.println(s);
+
                 ArrayList<String> param = new ArrayList<>(Arrays.asList(s.split(",")));
 
                 firstName = param.get(0);
@@ -51,15 +60,9 @@ public class Owners {
                 age = Integer.parseInt(param.get(2));
                 address = param.get(3);
                 phone = param.get(4);
-//          Создаю объект с известными полями и добавляю в список объектов
                 owner.add(new Owners(firstName, lastName, age, address, phone));
             }
             return owner;
-
-        } catch (Exception ignored) {
-
-        }
-        return null;
     }
     @Override
     public boolean equals(Object object) {

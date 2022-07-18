@@ -8,6 +8,7 @@ public class Pets {
     private String name;
     private String owner;
     private int age;
+    private ArrayList<String> buffer;
 
     public Pets(String name, String owner, int age){
         this.name = name;
@@ -20,7 +21,7 @@ public class Pets {
     }
 
 
-    public ArrayList<Pets> petCreator() {
+    public ArrayList<String> readFromFile(){
         File file = new File("Pets.txt");
         try (BufferedReader bReader = new BufferedReader(new FileReader(file))) {
 
@@ -30,29 +31,28 @@ public class Pets {
             while ((line = bReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
-//          Вычитал все из файла. Разделяю по ";" и создаю список
+
             String allLines = String.valueOf(stringBuilder);
-            ArrayList<String> buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
-//          В этот список буду добавлять созданные объекты класса Pets
-            ArrayList<Pets> pet = new ArrayList<>();
-//          Беру по очереди каждую часть их буферного списка, сплитю и вношу в список полей объекта
-            for (String s : buffer) {
-//                System.out.println(s);
-                ArrayList<String> param = new ArrayList<>(Arrays.asList(s.split(",")));
-
-                name = param.get(0);
-                owner = param.get(1);
-                age = Integer.parseInt(param.get(2));
-//          Создаю объект с известными полями и добавляю в список объектов
-                pet.add(new Pets(name, owner, age));
-            }
-            return pet;
-
+            buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
         } catch (Exception ignored) {
 
         }
+        return buffer;
+    }
 
-        return null;
+
+    public ArrayList<Pets> petCreator() {
+
+            ArrayList<Pets> pet = new ArrayList<>();
+
+            for (String s : buffer) {
+                ArrayList<String> param = new ArrayList<>(Arrays.asList(s.split(",")));
+                name = param.get(0);
+                owner = param.get(1);
+                age = Integer.parseInt(param.get(2));
+                pet.add(new Pets(name, owner, age));
+            }
+            return pet;
     }
 
 
