@@ -5,17 +5,22 @@ import java.util.Objects;
 
 public class Pets {
 
-    private static String name;
-    private static String owner;
-    private static int age;
+    private String name;
+    private String owner;
+    private int age;
 
     public Pets(String name, String owner, int age){
-        Pets.name = name;
-        Pets.owner = owner;
-        Pets.age = age;
+        this.name = name;
+        this.owner = owner;
+        this.age = age;
     }
 
-    public static ArrayList<Pets> petCreator() {
+    public Pets() {
+
+    }
+
+
+    public ArrayList<Pets> petCreator() {
         File file = new File("Pets.txt");
         try (BufferedReader bReader = new BufferedReader(new FileReader(file))) {
 
@@ -29,7 +34,7 @@ public class Pets {
             String allLines = String.valueOf(stringBuilder);
             ArrayList<String> buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
 //          В этот список буду добавлять созданные объекты класса Pets
-            ArrayList<Pets> pets = new ArrayList<>();
+            ArrayList<Pets> pet = new ArrayList<>();
 //          Беру по очереди каждую часть их буферного списка, сплитю и вношу в список полей объекта
             for (String s : buffer) {
 //                System.out.println(s);
@@ -39,15 +44,17 @@ public class Pets {
                 owner = param.get(1);
                 age = Integer.parseInt(param.get(2));
 //          Создаю объект с известными полями и добавляю в список объектов
-                pets.add(new Pets(name, owner, age));
+                pet.add(new Pets(name, owner, age));
             }
-            return pets;
+            return pet;
 
         } catch (Exception ignored) {
 
         }
+
         return null;
     }
+
 
     @Override
     public boolean equals(Object object) {

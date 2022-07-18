@@ -8,21 +8,25 @@ import java.util.Objects;
 
 public class Owners {
 
-    private static String firstName;
-    private static String lastName;
-    private static int age;
-    private static String address;
-    private static String phone;
+    private String firstName;
+    private String lastName;
+    private int age;
+    private String address;
+    private String phone;
 
     public Owners(String firstName, String lastName, int age, String address, String phone) {
-        Owners.firstName = firstName;
-        Owners.lastName = lastName;
-        Owners.age = age;
-        Owners.address = address;
-        Owners.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.address = address;
+        this.phone = phone;
     }
 
-    public static ArrayList<Owners> ownerCreator(){
+    public Owners() {
+
+    }
+
+    public ArrayList<Owners> ownerCreator(){
         File file = new File("Owners.txt");
         try (BufferedReader bReader = new BufferedReader(new FileReader(file))) {
 
@@ -36,7 +40,7 @@ public class Owners {
             String allLines = String.valueOf(stringBuilder);
             ArrayList<String> buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
 //          В этот список буду добавлять созданные объекты класса Owners
-            ArrayList<Owners> owners = new ArrayList<>();
+            ArrayList<Owners> owner = new ArrayList<>();
 //          Беру по очереди каждую часть их буферного списка, сплитю и вношу в список полей объекта
             for (String s : buffer) {
 //                System.out.println(s);
@@ -48,9 +52,9 @@ public class Owners {
                 address = param.get(3);
                 phone = param.get(4);
 //          Создаю объект с известными полями и добавляю в список объектов
-                owners.add(new Owners(firstName, lastName, age, address, phone));
+                owner.add(new Owners(firstName, lastName, age, address, phone));
             }
-            return owners;
+            return owner;
 
         } catch (Exception ignored) {
 

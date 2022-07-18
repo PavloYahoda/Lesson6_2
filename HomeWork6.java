@@ -1,21 +1,36 @@
-import java.util.Objects;
+
+import java.util.ArrayList;
+
 
 public class HomeWork6 {
+
+    Pets pet = new Pets();
+    Owners owner = new Owners();
+    ArrayList<Pets> myPet = pet.petCreator();
+    ArrayList<Owners> myOwner = owner.ownerCreator();
+
+    Object Mars = myPet.get(0);
+    Object Bars = myPet.get(1);
+    Object Fas = myPet.get(2);
+    Object Bogdan = myOwner.get(0);
+    Object Andrew = myOwner.get(1);
+    Object Pavlo = myOwner.get(2);
+
 
     public static void main(String[] args) {
 
         System.out.println("Is Mars equals Bars: "
-                + Objects.requireNonNull(Pets.petCreator()).get(0).equals(Objects.requireNonNull(Pets.petCreator()).get(1)));
+                + Mars.equals(Bars));
         System.out.println("Is Mars equals Fas: "
-                + Objects.requireNonNull(Pets.petCreator()).get(0).equals(Objects.requireNonNull(Pets.petCreator()).get(2)));
+                + Mars.equals(Fas));
         System.out.println("Is Bars equals Fas: "
-                + Objects.requireNonNull(Pets.petCreator()).get(1).equals(Objects.requireNonNull(Pets.petCreator()).get(2)));
+                + Bars.equals(Fas));
         System.out.println("Is Bogdan equals Andrew: "
-                + Objects.requireNonNull(Owners.ownerCreator()).get(0).equals(Objects.requireNonNull(Owners.ownerCreator()).get(1)));
+                + Bogdan.equals(Andrew));
         System.out.println("Is Bogdan equals Pavlo: "
-                + Objects.requireNonNull(Owners.ownerCreator()).get(0).equals(Objects.requireNonNull(Owners.ownerCreator()).get(2)));
+                + Bogdan.equals(Pavlo));
         System.out.println("Is Andrew equals Pavlo: "
-                + Objects.requireNonNull(Owners.ownerCreator()).get(1).equals(Objects.requireNonNull(Owners.ownerCreator()).get(2)));
+                + Andrew.equals(Pavlo));
 
     }
 }
