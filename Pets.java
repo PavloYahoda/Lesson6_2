@@ -8,7 +8,7 @@ public class Pets {
     private String name;
     private String owner;
     private int age;
-    private ArrayList<String> buffer;
+    public ArrayList<String> buffer;
 
     public Pets(String name, String owner, int age){
         this.name = name;
@@ -19,7 +19,6 @@ public class Pets {
     public Pets() {
 
     }
-
 
     public ArrayList<String> readFromFile(){
         File file = new File("Pets.txt");
@@ -34,10 +33,11 @@ public class Pets {
 
             String allLines = String.valueOf(stringBuilder);
             buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
+            return buffer;
         } catch (Exception ignored) {
 
         }
-        return buffer;
+       return null;
     }
 
 
@@ -45,7 +45,7 @@ public class Pets {
 
             ArrayList<Pets> pet = new ArrayList<>();
 
-            for (String s : buffer) {
+            for (String s : readFromFile()) {
                 ArrayList<String> param = new ArrayList<>(Arrays.asList(s.split(",")));
                 name = param.get(0);
                 owner = param.get(1);

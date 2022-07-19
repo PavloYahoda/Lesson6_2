@@ -13,7 +13,7 @@ public class Owners {
     private int age;
     private String address;
     private String phone;
-    private ArrayList<String> buffer;
+    public ArrayList<String> buffer;
 
     public Owners(String firstName, String lastName, int age, String address, String phone) {
         this.firstName = firstName;
@@ -51,7 +51,7 @@ public class Owners {
 
             ArrayList<Owners> owner = new ArrayList<>();
 
-            for (String s : buffer) {
+            for (String s :  readFromFile()) {
 
                 ArrayList<String> param = new ArrayList<>(Arrays.asList(s.split(",")));
 
