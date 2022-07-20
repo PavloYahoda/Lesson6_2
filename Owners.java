@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -13,7 +11,7 @@ public class Owners {
     private int age;
     private String address;
     private String phone;
-    public ArrayList<String> buffer;
+    private ArrayList<String> param;
 
     public Owners(String firstName, String lastName, int age, String address, String phone) {
         this.firstName = firstName;
@@ -27,40 +25,25 @@ public class Owners {
 
     }
 
-    public ArrayList<String> readFromFile(){
-        File file = new File("Owners.txt");
-        try (BufferedReader bReader = new BufferedReader(new FileReader(file))) {
+    public Owners(ArrayList<String> param){
+        this.param = param;
+        this.firstName = param.get(0);
+        this.lastName = param.get(1);
+        this.age = Integer.parseInt(param.get(2));
+        this.address = param.get(3);
+        this.phone = param.get(4);
 
-            StringBuilder stringBuilder = new StringBuilder();
-
-            String line;
-            while ((line = bReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-
-            String allLines = String.valueOf(stringBuilder);
-            buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
-
-        } catch (Exception ignored) {
-
-        }
-        return buffer;
     }
 
     public ArrayList<Owners> ownerCreator(){
 
-            ArrayList<Owners> owner = new ArrayList<>();
+        ReadFromFile readFromFile = new ReadFromFile();
+        ArrayList<Owners> owner = new ArrayList<>();
 
-            for (String s :  readFromFile()) {
+            for (String s :  readFromFile.readFromFile("Owners.txt")) {
 
-                ArrayList<String> param = new ArrayList<>(Arrays.asList(s.split(",")));
-
-                firstName = param.get(0);
-                lastName = param.get(1);
-                age = Integer.parseInt(param.get(2));
-                address = param.get(3);
-                phone = param.get(4);
-                owner.add(new Owners(firstName, lastName, age, address, phone));
+                param = new ArrayList<>(Arrays.asList(s.split(",")));
+                owner.add(new Owners(param));
             }
             return owner;
     }

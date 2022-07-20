@@ -1,4 +1,4 @@
-import java.io.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -8,9 +8,9 @@ public class Pets {
     private String name;
     private String owner;
     private int age;
-    public ArrayList<String> buffer;
+    private ArrayList<String> param;
 
-    public Pets(String name, String owner, int age){
+    public Pets(String name, String owner, int age) {
         this.name = name;
         this.owner = owner;
         this.age = age;
@@ -19,40 +19,24 @@ public class Pets {
     public Pets() {
 
     }
-
-    public ArrayList<String> readFromFile(){
-        File file = new File("Pets.txt");
-        try (BufferedReader bReader = new BufferedReader(new FileReader(file))) {
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            String line;
-            while ((line = bReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-
-            String allLines = String.valueOf(stringBuilder);
-            buffer = new ArrayList<>(Arrays.asList(allLines.split(";")));
-            return buffer;
-        } catch (Exception ignored) {
-
-        }
-       return null;
+    public Pets(ArrayList<String> param) {
+        this.param = param;
+        this.name = param.get(0);
+        this.owner = param.get(1);
+        this.age = Integer.parseInt(param.get(2));
     }
-
 
     public ArrayList<Pets> petCreator() {
 
-            ArrayList<Pets> pet = new ArrayList<>();
+        ReadFromFile readFromFile = new ReadFromFile();
+        ArrayList<Pets> pet = new ArrayList<>();
 
-            for (String s : readFromFile()) {
-                ArrayList<String> param = new ArrayList<>(Arrays.asList(s.split(",")));
-                name = param.get(0);
-                owner = param.get(1);
-                age = Integer.parseInt(param.get(2));
-                pet.add(new Pets(name, owner, age));
-            }
-            return pet;
+        for (String s : readFromFile.readFromFile("Pets.txt")) {
+            param = new ArrayList<>(Arrays.asList(s.split(",")));
+
+            pet.add(new Pets(param));
+        }
+        return pet;
     }
 
 
